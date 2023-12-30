@@ -8,3 +8,4 @@ const name2="hari"
 
 //sharing minimum ie name1 and name2
 module.exports={name1,name2}
+

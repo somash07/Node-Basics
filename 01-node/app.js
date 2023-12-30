@@ -1,14 +1,34 @@
-//modules: Encapsulated code ,only share what we want to share ie minimum.Every file is a module in node.
+//----------->OS-MODULE
+const { log } = require('console')
+const os=require('os')//builtInModule
 
-//require names from firstModule.js
-//getting name1 and name2 from the firstModule.js
+console.log(os.userInfo())//returns usr info
 
-const names=require('./firstModules.js')
-console.log(names);
+console.log(`system is up for ${os.uptime()} seconds`)//returns system up time in seconds
 
-//importing function Hi() from the secondModule.js 
-const sayHi=require ('./secondModule.js')
+const currentOs={
+    name: os.type(),
+    release: os.release(),
+    totalMem: os.totalmem(),
+    freeMem: os.freemem(),
+}
+console.log(currentOs)
 
-sayHi(names.name1)
-sayHi(names.name2)
-sayHi('somash')
+
+//-------------->PATH-MODULE
+
+const path=require('path')
+console.log(path.sep)//separator dinxa
+console.log(path.join('/NODE_BASICS','01-node','app.js'))//just jodxa
+console.log(path.basename(__dirname))//last ko dinxa
+
+const abs=path.resolve(__dirname,'firstModule.js') 
+console.log(abs)
+
+//------------->FILESYSTEM-MODULE
+//tyo types either asynchronously-non blocking,synchrously-blocking
+
+const {readFileSync,writeFileSync} = require('fs')
+
+const first=readFileSync('./subfolder/first.txt','utf8')//utf8 is an encoding tech
+console.log(first)
