@@ -1,34 +1,19 @@
-//----------->OS-MODULE
-const { log } = require('console')
-const os=require('os')//builtInModule
+const http=require('http')
 
-console.log(os.userInfo())//returns usr info
+const server=http.createServer((req,res)=>{
+    if(req.url==='/')// '/' indicates a homepage
+    {
+        res.end("welcome to home")
+    }
+    if(req.url==='/about'){
+        res.end("here is abtme")
+    }
+    
+    res.end(`
+        <h1>ooppppppps!!!</h1>
+        <p>cant find page</p>
+        <a href="/">home</a>
+    `)
+})
 
-console.log(`system is up for ${os.uptime()} seconds`)//returns system up time in seconds
-
-const currentOs={
-    name: os.type(),
-    release: os.release(),
-    totalMem: os.totalmem(),
-    freeMem: os.freemem(),
-}
-console.log(currentOs)
-
-
-//-------------->PATH-MODULE
-
-const path=require('path')
-console.log(path.sep)//separator dinxa
-console.log(path.join('/NODE_BASICS','01-node','app.js'))//just jodxa
-console.log(path.basename(__dirname))//last ko dinxa
-
-const abs=path.resolve(__dirname,'firstModule.js') 
-console.log(abs)
-
-//------------->FILESYSTEM-MODULE
-//tyo types either asynchronously-non blocking,synchrously-blocking
-
-const {readFileSync,writeFileSync} = require('fs')
-
-const first=readFileSync('./subfolder/first.txt','utf8')//utf8 is an encoding tech
-console.log(first)
+server.listen(4501)
