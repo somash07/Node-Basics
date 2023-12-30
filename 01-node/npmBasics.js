@@ -8,7 +8,11 @@
 2: npm init: step by step,press to skip
 3: npm init -y: everything default
 
-devDependencies: testings,used while deveploping. npm i package_name--save-dev or simply npm i package_name -D
+devDependencies: testings,used while deveploping. npm i package_name --save-dev or simply npm i package_name -D
+
+npx: globally hanna parni package haru nahali use garunxa eg for frontend frameworks react,gatsby 
+
+-> package-lock.js: versions of dependencies lock hunxan ani deploy garni bela tyei version ko package use hunxa
 */
 
 const _=require('lodash')
