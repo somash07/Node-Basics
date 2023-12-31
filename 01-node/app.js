@@ -1,22 +1,20 @@
-const http=require('http')
+const {readFile,writeFile}=require('fs')
+//to avoid wrapping of promiseseeessss
+//util module ko promisify is used to make a promise
 
+const util=require('util')
+const readFilePromise=util.promisify(readFile)
+const writeFilePromise=util.promisify(writeFile)
 
-const server=http.createServer((req,res)=>{
-    if(req.url==='/'){
-        res.end("home page")
-        return
+const start=async()=>{
+    try{
+        const first=await readFilePromise('./subfolder/first.txt','utf8')
+        const second=await readFilePromise('./subfolder/second.txt','utf8')
+
+        console.log(first,second)
+        await writeFilePromise('./subfolder/finalres.txt',`hiiii guys: ${first} ${second}`,{flag: 'a'})
+    }catch(err){
+        console.log('this is error')
     }
-    if(req.url==='/about'){
-        //Blockeeeeeeennnnnnnnng code
-        for(let i=0;i<1000;i++){
-            for(let j=0;j<1000;j++){
-                console.log(`${i},${j}`)
-            }
-        }
-        res.end("about page")
-        return
-    }
-    res.end('err')
-})
-
-server.listen(5010,()=>console.log("server listening on por 5000..."))
+}
+start()
