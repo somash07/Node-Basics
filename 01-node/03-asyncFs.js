@@ -1,47 +1,20 @@
 const {readFile,writeFile}=require('fs')
+//to avoid wrapping of promiseseeessss
+//util module ko promisify is used to make a promise
 
-//using promise for asyncFS returns promise
-const putText=(path,txt)=>{
-    return new Promise((resolve,reject)=>{
-        writeFile(path,txt,(err,res)=>{
-            if(err){
-                reject(err)
-            }
-            else{
-                resolve(res)
-            }
-        })
-    })
-}
-const getText=(path)=>{
-    return new Promise((resolve,reject)=>{
-        readFile(path,'utf8',(err,res)=>{
-            if(err){
-                reject(err)
-            }
-            else{
-                resolve(res)
-            }
-        })
-    })
-}
+const util=require('util')
+const readFilePromise=util.promisify(readFile)
+const writeFilePromise=util.promisify(writeFile)
 
-//promise used
-// getText('./subfolder/first.txt')
-// .then((val)=>console.log(val))
-// .catch((err)=>console.log(err))
-
-
-//async-await
 const start=async()=>{
     try{
-    const first= await getText('./subfolder/first.txt')
-    const second= await getText('./subfolder/second.txt')
-    await putText('./subfolder/finalres.txt',first)
-    console.log(first,second)
-    }catch(error){
-        console.log("any errMsg error",error)
+        const first=await readFilePromise('./subfolder/first.txt','utf8')
+        const second=await readFilePromise('./subfolder/second.txt','utf8')
+
+        console.log(first,second)
+        await writeFilePromise('./subfolder/finalres.txt',`hiiii guys: ${first} ${second}`,{flag: 'a'})//append
+    }catch(err){
+        console.log('this is error')
     }
 }
-
 start()
