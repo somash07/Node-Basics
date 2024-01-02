@@ -5,7 +5,7 @@
   "main": "packageBasics.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": " node 01-node/modules.js",
+    "start": " nodemon 02-express/app.js",
     "dev": "nodemon 01-node/app.js"
   },
   "author": "",
