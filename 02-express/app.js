@@ -7,11 +7,14 @@
 
 */
 
+//->if we want ro res.write with url=index,then the url access all the link of index.html ie style or jsLogic so to cope with it this is the approach
 const http =require('http')
 const fs=require('fs')
 
 const dummyData=fs.readFileSync('./dummy.html')
 
+const styles=fs.readFileSync('./styles.css')
+const logic=fs.readFileSync('./jsLogic.js')
 const server=http.createServer((req,res)=>{
 
             //request objs :
@@ -25,6 +28,16 @@ const server=http.createServer((req,res)=>{
      else if(req.url==='/about'){
         res.writeHead(200,'ok',{'content-type': 'text/html'})
         res.write("this is a about page")
+        res.end()
+     }
+     else if(req.url==='/styles.css'){
+        res.writeHead(200,'ok',{'content-type': 'text/css'})
+        res.write(styles)
+        res.end()
+     }
+     else if(req.url==='/jsLogic.js'){
+        res.writeHead(200,'ok',{'content-type': 'text/javacript'})
+        res.write(logic)
         res.end()
      }
      else{
