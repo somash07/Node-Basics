@@ -4,8 +4,9 @@
     api->json->res.json()->stringify
 
     res.json()
-*/
+*/ 
 
+//bazookaaa on a cockroach......
 
 const { log } = require('console')
 const express=require('express')
@@ -27,6 +28,7 @@ app.get('/api/products',(req,res)=>{
     res.json(newProd)
 })
 
+//hardcoding route here can be solveed by route parameter in express.
 app.get('/api/products/1',(req,res)=>{
     const singleProduct=products.find((product)=>{
        return product.id===1

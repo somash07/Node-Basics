@@ -1,11 +1,13 @@
 /*
-    SSR: server side rendering.
+    route Parameter in node . ->
+    /path/:param1/:param2/....
+    
+    console.log(req.params)-->  {param1: value,param2: value,param3: value......}
 
-    api->json->res.json()->stringify
 
-    res.json()
 */
 
+//
 
 const { log } = require('console')
 const express=require('express')
@@ -27,13 +29,28 @@ app.get('/api/products',(req,res)=>{
     res.json(newProd)
 })
 
-app.get('/api/products/1',(req,res)=>{
+app.get('/api/products/:productId',(req,res)=>{//the productId in url is always a string.
+
+
+    // console.log(req);
+    console.log(req.params)
+
+    const{productId}=req.params
     const singleProduct=products.find((product)=>{
-       return product.id===1
+       return product.id===Number(productId)
     })
+
+    //is sing leProduct doesnt exists
+    if(!singleProduct){
+        return res.status(404).send("product does not exist")
+    }
+
     res.json(singleProduct)
 })
 
+app.all('*',(req,res)=>{
+    res.status(404).send("file not found")
+})
 
 app.listen(4502,()=>{
     console.log('listening to port number 4501')
