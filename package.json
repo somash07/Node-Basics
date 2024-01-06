@@ -5,8 +5,8 @@
   "main": "packageBasics.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": " nodemon 02-express/app.js",
-    "dev": "nodemon 01-node/app.js"
+    "start": "node 02-express/app.js",
+    "dev": " npm start --watch 02-express/app.js"
   },
   "author": "",
   "license": "ISC",
