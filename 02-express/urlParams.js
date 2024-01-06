@@ -1,5 +1,5 @@
 /*
-    QueryStringParameters or url parameters
+    QueryStringParameters or url parameters: used to send small amout of information using url
 
 */
 
@@ -32,7 +32,8 @@ app.get('/api/products/query', (req, res) => {
     if(sortedProduct.length<1){
         // res.status(200).send("no product found");
 
-        res.status(200).json({staus: 'true',data: []})
+        return res.status(200).json({staus: 'true',data: []})
+        //condition then return because we can only have one response per request.
 
     }
     res.status(200).send(sortedProduct);

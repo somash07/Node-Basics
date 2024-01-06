@@ -40,7 +40,7 @@ app.get('/api/products/:productId',(req,res)=>{//the productId in url is always 
        return product.id===Number(productId)
     })
 
-    //is sing leProduct doesnt exists
+    //is singleProduct doesnt exists
     if(!singleProduct){
         return res.status(404).send("product does not exist")
     }
