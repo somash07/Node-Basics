@@ -1,0 +1,18 @@
+nav{
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    height: 15vh;
+    background-color: black;
+    color: white;
+}
+
+.navItems{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.navItems li{
+    list-style-type: none;
+}
