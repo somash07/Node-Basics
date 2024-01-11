@@ -22,7 +22,9 @@ app.post('/login',(req,res)=>{
         return res.status(200).send(`welcome ${name}`)
         return
     }
-    res.send('post')
+    res.send('please provide credentials')
 })
 
-app.listen(4501,()=>console.log('listening to port 4501'))
+app.listen(4501,()=>console.log('listeninsg to port 4501'))
+
+// The extended: false option indicates that the values in the URL-encoded data should be strings or arrays, rather than complex objects. This is a configuration option provided by the body-parser middleware
