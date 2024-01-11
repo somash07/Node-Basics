@@ -1,3 +1,7 @@
 /node_modules
-!/node-01/subfolder
+
+/01-node/subfolder/
+
 .DS_Store
+
+/02-express/data.js
