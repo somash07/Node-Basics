@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./normalize.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Javascript</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-center">
+          <h5>HTTP Methods</h5>
+          <div>
+            <a href="index.html">regular </a>
+            <a href="try.html">javascript </a>
+          </div>
+        </div>
+      </nav>
+      <main>
+        <section>
+          <form>
+            <h3>Javascript Form</h3>
+            <div class="form-row">
+              <label for="name"> enter name </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                class="form-input"
+                autocomplete="false"
+              />
+              <small class="form-alert"></small>
+            </div>
+            <button type="submit" class="block submit-btn">submit</button>
+          </form>
+          <div class="result"></div>
+        </section>
+      </main>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+      <script>
+        const result=document.querySelector('.result')
+
+        const getPeople= async()=>{
+            try{
+                const response= await axios.get('/api/v1')
+                console.log(response.data)
+                const peopleName=response.data.data.map((person)=>{
+                    return `<h5>${person.name}</h5>`
+                })
+                // console.log(peopleName)
+                result.innerHTML=peopleName.join(',')
+            }catch(err){
+                result.innerHTML="cannot fetch data"
+            }
+        }
+        getPeople()
+
+        const btn=document.querySelector('.submit-btn')
+        const formAlert = document.querySelector('.form-alert')
+        const formInp=document.querySelector('.form-input')
+
+        btn.addEventListener('click',async(e)=>{
+            e.preventDefault()
+            const inputValue=formInp.value
+
+            try{
+                const {data}=await axios.post('/api/v1',{name: inputValue})
+                console.log(data)
+                const newElement=document.createElement('h5')
+                newElement.textContent=data.person
+
+                result.appendChild(newElement)
+            }
+            catch(err){
+                result.innerHTML='err ho vai'
+            }
+        })
+
+      </script>
+</body>
+</html>
