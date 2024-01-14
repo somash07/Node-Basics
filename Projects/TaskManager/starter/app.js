@@ -2,14 +2,14 @@ const express=require('express');
 const app=express();
 const tasks=require('./routes/tasks.js')
 
-app.use('/api/v1/tasks',tasks)
-
 app.use(express.json())//req.body ma data jana
+
+app.use('/api/v1/tasks',tasks)
 //routes
 
-app.get('/hello',(req,res)=>[
+app.get('/hello',(req,res)=>{
     res.send('task manager app')
-])
+})
 
 const port=4501
 
