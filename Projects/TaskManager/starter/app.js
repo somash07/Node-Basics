@@ -7,12 +7,9 @@ require('dotenv').config()
 
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())//req.body ma data jana
+app.use(express.static('./public'))
 app.use('/api/v1/tasks',tasks)
 //routes
-
-app.get('/hello',(req,res)=>{
-    res.send('task manager app')
-})
 
 const port=4502
 const start = async()=>{
