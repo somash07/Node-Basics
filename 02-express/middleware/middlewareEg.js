@@ -7,8 +7,6 @@
 
     1.app.use('route',middleware)
     2. options: our own,built in middlewares in express,thirdparty middlewares
-
-
 */
 
 const express=require('express')

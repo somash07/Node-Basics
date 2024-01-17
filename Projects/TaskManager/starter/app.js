@@ -3,15 +3,17 @@ const app=express();
 const tasks=require('./routes/tasks.js')
 const connectDB = require('./db/connect.js')
 require('dotenv').config()
+const errorHandlerMiddleware=require('./middlewares/errorHandler.js')
 
 
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())//req.body ma data jana
 app.use(express.static('./public'))
 app.use('/api/v1/tasks',tasks)
+app.use(errorHandlerMiddleware)
 //routes
 
-const port=4502
+const port=process.env.PORT||4502
 const start = async()=>{
     try{
         await connectDB(process.env.MONGO_URI)
