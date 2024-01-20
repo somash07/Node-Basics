@@ -18,7 +18,7 @@ app.get('/',(req,res)=>{
     res.send('<h1>store</h1><a href="/api/v1/products">product routes</a>')
 })
 //setting router
-app.use('/api/v1/products', productsRouter )
+app.use('/api/v1/products', productsRouter)
 //products route
 
 app.use(errorHandlerMiddleware);
@@ -29,6 +29,7 @@ const port=process.env.PORT || 3000
 const start=async()=>{
     try{
         await connectDB(process.env.MONGO_URI);
+        console.log('successfully connected to the database..')
         app.listen(port,()=>{
             console.log(`server is listening to port ${port}....`)
         })
