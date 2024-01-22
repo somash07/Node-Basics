@@ -2,7 +2,7 @@ const { query } = require('express')
 const Product=require('../models/product')
 const getAllProductsStatic=async(req,res)=>{
     // throw Error('testing async errors')//does just like async wrapper, does not require next()
-    // const search='a'
+    // const search='a' 
     // const products=await Product.find({
     //     name: {$regex:search,$options: 'i'}//$options : 'i' indicates case insensitive and has (search) in it
     // })
@@ -15,8 +15,9 @@ const getAllProductsStatic=async(req,res)=>{
     res.status(200).json({products,noofHits: products.length})
 }
 const getAllProducts=async(req,res)=>{
-    const {featured,company,name,sort,fields}=req.query
+    const {featured,company,name,sort,fields,numericFilters}=req.query
     const queryObj={}
+
     if(featured){
         queryObj.featured=featured ==='true'? true: false;
     }
@@ -25,6 +26,27 @@ const getAllProducts=async(req,res)=>{
     }
     if(name){
         queryObj.name=name
+    }
+    if(numericFilters){
+        const operatorMap={
+            '>': '$gt',
+            '>=': '$gte',
+            '=': '$eq',
+            '<=': '$lte',
+            '<': '$le',
+        }
+
+        const regEx=/\b(<|>|>=|<=|=)\b/g
+        let filters=numericFilters.replace(regEx,(match)=>{
+            return `-${operatorMap[match]}-`
+        })
+        const options=['price','rating'];
+        filters= filters.split(',').forEach((item)=>{
+            const [field,operator,value]=item.split('-')
+            if(options.includes(field)){
+                queryObj[field]={[operator]: Number(value)}
+            }
+        })
     }
     console.log(queryObj)
     // let products=await Product.find(queryObj)//products is an array so .sort() method of array will be implemented so to tacke this: 
