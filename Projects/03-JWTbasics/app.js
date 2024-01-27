@@ -7,18 +7,16 @@ const mainRouter=require('./routes/main')
 const errorHandlerMiddleware=require('./middlewares/error-handler')
 const notFoundMiddleware=require('./middlewares/not-found')
 
-
 const app=express()
 
 //middlewares
-app.use(express.static('./public'))
-app.use(express.json())
 //setting up router
+app.use(express.json())
 app.use('/api/v1',mainRouter)
-
-
+app.use(express.static('./public'))
 app.use(errorHandlerMiddleware)
 app.use(notFoundMiddleware)
+
 
 const port=process.env.PORT || 3000;
 
